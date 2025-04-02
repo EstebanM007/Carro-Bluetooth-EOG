@@ -40,5 +40,3 @@ Para una explicación detallada del funcionamiento del sistema, consulta el sigu
 [Video explicativo](https://www.youtube.com/watch?v=coV044tbprE)
 
 ---
-
-Esta preview proporciona una visión general clara del proyecto, resaltando tanto la parte técnica como los beneficios del uso de señales EOG para el control del carro. ¡Espero que te resulte útil para documentar y compartir tu trabajo!
