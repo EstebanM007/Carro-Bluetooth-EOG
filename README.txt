@@ -1,4 +1,3 @@
-Aquí tienes una vista previa en formato Markdown que podrías utilizar para el repositorio:
 
 ---
 
