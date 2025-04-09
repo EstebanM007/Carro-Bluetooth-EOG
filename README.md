@@ -1,4 +1,4 @@
-# ✨ Carro Bluetooth EOG
+# 🚗 Carro Bluetooth EOG
 
 Este repositorio contiene toda la información y el código necesarios para **controlar un carro** utilizando señales *EOG (electrooculograma)* horizontales. El sistema se basa en el control de dos motores mediante dos comandos simples, utilizando comunicación **UART** a través de **Bluetooth**.
 
