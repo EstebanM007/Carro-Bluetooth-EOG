@@ -1,18 +1,22 @@
 from pylsl import StreamInlet, resolve_streams  # Librería para leer streams de LSL
 import time
 import pandas as pd
+import os  # Importar módulo para manejar rutas
 
-# Resolver todos los streams disponibles
-print("Buscando todos los streams disponibles...")
-all_streams = resolve_streams()
+# Función para buscar streams de manera continua
+def buscar_stream(tipo_stream):
+    while True:
+        print(f"Buscando stream de tipo '{tipo_stream}'...")
+        streams = [stream for stream in resolve_streams() if stream.type() == tipo_stream]
+        if streams:
+            print(f"Stream de tipo '{tipo_stream}' encontrado.")
+            return streams[0]
+        print(f"No se encontró stream de tipo '{tipo_stream}'. Reintentando en 2 segundos...")
+        time.sleep(2)
 
-# Filtrar los streams de tipo 'P1' y 'P2'
-stream_P1 = next((stream for stream in all_streams if stream.type() == 'P1'), None)
-stream_P2 = next((stream for stream in all_streams if stream.type() == 'P2'), None)
-
-# Verificar que ambos streams estén disponibles
-if not stream_P1 or not stream_P2:
-    raise RuntimeError("No se encontraron ambos streams de tipo 'P1' y 'P2'.")
+# Buscar los streams de tipo 'P1' y 'P2'
+stream_P1 = buscar_stream('P1')
+stream_P2 = buscar_stream('P2')
 
 # Crear inlets para leer datos de los streams
 inlet_P1 = StreamInlet(stream_P1)
@@ -37,25 +41,16 @@ try:
                 elapsed_time = time.time() - start_time  # Tiempo transcurrido en segundos
                 # Agregar los datos a la lista
                 data_list.append([elapsed_time, sample_P1[0], sample_P2[0]])
-                #print(f"Guardado: Tiempo={elapsed_time:.3f}s, P1={sample_P1[0]}, P2={sample_P2[0]}")
-                #Este print verifica los datos que se están guardando, pero puede ser comentado para evitar saturar la consola.
+                # Este print verifica los datos que se están guardando, pero puede ser comentado para evitar saturar la consola.
+                # print(f"Guardado: Tiempo={elapsed_time:.3f}s, P1={sample_P1[0]}, P2={sample_P2[0]}")
 
         except Exception as e:
             print(f"Error al leer los streams: {e}. Intentando reconectar...")
             # Intentar reconectar los streams
-            try:
-                stream_P1 = next((stream for stream in resolve_streams() if stream.type() == 'P1'), None)
-                stream_P2 = next((stream for stream in resolve_streams() if stream.type() == 'P2'), None)
-                if stream_P1 and stream_P2:
-                    inlet_P1 = StreamInlet(stream_P1)
-                    inlet_P2 = StreamInlet(stream_P2)
-                    print("Reconexión exitosa.")
-                else:
-                    print("No se encontraron streams. Reintentando en 2 segundos...")
-                    time.sleep(2)
-            except Exception as reconnection_error:
-                print(f"Error durante la reconexión: {reconnection_error}")
-                time.sleep(2)
+            stream_P1 = buscar_stream('P1')
+            stream_P2 = buscar_stream('P2')
+            inlet_P1 = StreamInlet(stream_P1)
+            inlet_P2 = StreamInlet(stream_P2)
 
 except KeyboardInterrupt:
     print("Detenido por el usuario. Guardando datos en 'datos_streams.xlsx'...")
@@ -63,6 +58,8 @@ except KeyboardInterrupt:
 # Crear un DataFrame con los datos
 df = pd.DataFrame(data_list, columns=["Tiempo (s)", "P1", "P2"])
 
-# Guardar en formato Excel, se reescriben los datos si el archivo ya existe
-df.to_excel("datos_streams.xlsx", index=False)
-print("Archivo 'datos_streams.xlsx' guardado correctamente.")
+# Obtener la ruta del script actual y guardar el archivo Excel en la misma carpeta
+ruta_script = os.path.dirname(os.path.abspath(__file__))  # Ruta del script actual
+archivo_excel = os.path.join(ruta_script, "datos_streams.xlsx")  # Crear la ruta completa del archivo
+df.to_excel(archivo_excel, index=False)
+print(f"Archivo '{archivo_excel}' guardado correctamente.")

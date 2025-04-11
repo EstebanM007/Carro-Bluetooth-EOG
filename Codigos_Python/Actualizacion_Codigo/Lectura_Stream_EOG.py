@@ -1,37 +1,53 @@
 from pylsl import StreamInlet, resolve_streams  # Librería para leer streams de LSL
 import serial
+import time
 
 # Configuración del puerto serial
-serialPort = serial.Serial('COM3', 9600, timeout=1)
+#serialPort = serial.Serial('COM3', 9600, timeout=1)
 print("Puerto serial configurado correctamente.")
 
-# Resolver todos los streams disponibles
-print("Buscando todos los streams disponibles...")
-all_streams = resolve_streams()
+# Función para buscar streams de manera continua
+def buscar_stream(tipo_stream):
+    while True:
+        print(f"Buscando stream de tipo '{tipo_stream}'...")
+        streams = [stream for stream in resolve_streams() if stream.type() == tipo_stream]
+        if streams:
+            print(f"Stream de tipo '{tipo_stream}' encontrado.")
+            return streams[0]
+        print(f"No se encontró stream de tipo '{tipo_stream}'. Reintentando en 2 segundos...")
+        time.sleep(2)
 
-# Mostrar los tipos de streams encontrados
-print("Tipos de streams disponibles:")
-for stream in all_streams:
-    print(f"- {stream.name()} (Tipo: {stream.type()})")
+# Función para crear un inlet y manejar reconexión
+def crear_inlet(tipo_stream):
+    while True:
+        try:
+            stream = buscar_stream(tipo_stream)
+            inlet = StreamInlet(stream)
+            print(f"Inlet creado para el stream de tipo '{tipo_stream}'.")
+            return inlet
+        except Exception as e:
+            print(f"Error al crear el inlet: {e}. Reintentando en 2 segundos...")
+            time.sleep(2)
 
-# Resolver streams de EOG
-print("Buscando stream EOG...")
-streams_EOG = [stream for stream in all_streams if stream.type() == 'EOG']
-
-# Verificar que se haya encontrado al menos un stream de tipo 'EOG'
-if len(streams_EOG) == 0:
-    raise RuntimeError("No se encontró ningún stream de EOG.")
-
-# Crear un inlet para leer datos del primer stream de tipo 'EOG'
-inlet_EOG = StreamInlet(streams_EOG[0])
+# Crear un inlet para el stream de tipo 'EOG'
+inlet_EOG = crear_inlet('EOG')
 
 # Bucle principal para procesar los datos del stream
 while True:
-    # Leer una muestra del stream con un tiempo de espera de 0.5 segundos
-    sample, _ = inlet_EOG.pull_sample(timeout=0.5)
-    if sample:
-        # Aplicar condiciones a la señal EOG
-        if 400 <= sample[0] <= 450:
-            serialPort.write(b'D')  # Enviar comando 'D' por el puerto serial
-        elif -450 <= sample[0] <= -400:
-            serialPort.write(b'W')  # Enviar comando 'W' por el puerto serial
+    try:
+        # Leer una muestra del stream con un tiempo de espera de 0.5 segundos
+        sample, _ = inlet_EOG.pull_sample(timeout=0.5)
+        if sample:
+            # Aplicar condiciones a la señal EOG
+            if 310 <= sample[0] <= 350:  # Usar directamente sample[0] para las condiciones
+                #serialPort.write(b'D')  # Enviar comando 'D' por el puerto serial
+                print("D enviado")
+            elif -360 <= sample[0] <= -310:  # Usar directamente sample[0] para las condiciones
+                #serialPort.write(b'W')  # Enviar comando 'W' por el puerto serial
+                print("W enviado")
+        else:
+            print("Sin muestra")
+
+    except Exception as e:
+        print(f"Error al procesar los datos: {e}. Intentando reconectar el stream...")
+        inlet_EOG = crear_inlet('EOG')  # Volver a buscar y crear el inlet
