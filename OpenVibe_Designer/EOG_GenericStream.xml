@@ -205,6 +205,10 @@
 					<Value>400</Value>
 				</Attribute>
 				<Attribute>
+					<Identifier>(0x341d3912, 0x1478de86)</Identifier>
+					<Value>1</Value>
+				</Attribute>
+				<Attribute>
 					<Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
 					<Value>(0x92c056a7, 0x2dc71aff)</Value>
 				</Attribute>
@@ -313,6 +317,10 @@
 				<Attribute>
 					<Identifier>(0x207c9054, 0x3c841b63)</Identifier>
 					<Value>496</Value>
+				</Attribute>
+				<Attribute>
+					<Identifier>(0x341d3912, 0x1478de86)</Identifier>
+					<Value>1</Value>
 				</Attribute>
 				<Attribute>
 					<Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
@@ -506,7 +514,7 @@
 					<TypeIdentifier>(0x330306dd, 0x74a95f98)</TypeIdentifier>
 					<Name>Filename</Name>
 					<DefaultValue></DefaultValue>
-					<Value>C:/Users/esteb/OneDrive/Documentos/Git/Carro_Bluetooth_EOG/OpenVibe_Designer/Pruebas EOG/EOG-signal-1-online-[2025.04.09-20.11.55].ov</Value>
+					<Value>C:/Users/esteb/OneDrive/Documentos/Git/Carro_Bluetooth_EOG/OpenVibe_Designer/Data/EOG.adicht</Value>
 					<Modifiability>false</Modifiability>
 				</Setting>
 			</Settings>
@@ -540,17 +548,6 @@
 	</Boxes>
 	<Links>
 		<Link>
-			<Identifier>(0x00000988, 0x000043d0)</Identifier>
-			<Source>
-				<BoxIdentifier>(0x312e1662, 0x0673d431)</BoxIdentifier>
-				<BoxOutputIndex>2</BoxOutputIndex>
-			</Source>
-			<Target>
-				<BoxIdentifier>(0x0000367a, 0x00002c04)</BoxIdentifier>
-				<BoxInputIndex>1</BoxInputIndex>
-			</Target>
-		</Link>
-		<Link>
 			<Identifier>(0x00000b06, 0x00001378)</Identifier>
 			<Source>
 				<BoxIdentifier>(0x00007026, 0x00000761)</BoxIdentifier>
@@ -570,17 +567,6 @@
 			<Target>
 				<BoxIdentifier>(0x00007026, 0x00000761)</BoxIdentifier>
 				<BoxInputIndex>0</BoxInputIndex>
-			</Target>
-		</Link>
-		<Link>
-			<Identifier>(0x00003014, 0x0000772a)</Identifier>
-			<Source>
-				<BoxIdentifier>(0x312e1662, 0x0673d431)</BoxIdentifier>
-				<BoxOutputIndex>2</BoxOutputIndex>
-			</Source>
-			<Target>
-				<BoxIdentifier>(0x00004229, 0x00005c36)</BoxIdentifier>
-				<BoxInputIndex>1</BoxInputIndex>
 			</Target>
 		</Link>
 		<Link>
