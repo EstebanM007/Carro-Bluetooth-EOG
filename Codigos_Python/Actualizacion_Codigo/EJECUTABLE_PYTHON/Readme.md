@@ -105,21 +105,3 @@ else:
     pass
 ```
 
----
-
-## 🧾 **Resumen Final**
-
-🛠️ Tu script:
-
-* Detecta puertos COM y Streams LSL.
-* Mapea límites y canales.
-* Envía datos al microcontrolador.
-* Fue convertido a `.exe` con **auto-py-to-exe**.
-
-📋 Requiere instalar librerías vía `pip install -r requirements.txt`.
-
-⚠️ Ten en cuenta las limitaciones del `.exe` respecto a instalación o verificación de dependencias.
-
----
-
-Si deseas, puedo ayudarte a depurar por qué aún no funciona el `.exe`. ¿Quieres que revisemos eso también?
