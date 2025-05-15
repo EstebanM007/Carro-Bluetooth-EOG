@@ -3,7 +3,7 @@
 
 ## 🧠 **Explicación del Código y Objetivo**
 
-🔧 Aún no funciona el `.exe`, pero se ha avanzado en la **conversión de un script en Python a un archivo ejecutable**.
+🔧 Actualizacion del .exe y librerias utlizadas.
 
 🧪 El script realiza dos tareas principales:
 
@@ -18,6 +18,110 @@
 * 📡 Después del mapeo de umbrales, el script **envía datos al puerto COM** para comunicarse con un **microcontrolador**.
 
 ![alt text](<Interfaz de Configuracion LSL y COM-1.png>)
+
+## 🚀 Guía Profesional para Convertir tu Proyecto Python en un `.exe` OPCION 1
+
+Lleva tu aplicación Python al siguiente nivel y compártela sin complicaciones: tus usuarios sólo necesitarán hacer **doble clic**.
+
+---
+
+### ✅ 1. Prepara tu proyecto
+
+* **Organiza tu código** en una carpeta limpia, por ejemplo:
+
+  ```
+  my_automation_app/
+  ├── Interfaz.py
+  ├── requirements.txt
+  └── assets/
+  ```
+* **Crea un entorno virtual** para aislar dependencias:
+
+  ```bash
+  python -m venv venv
+  ```
+
+---
+
+### 🖥️ 2. Activa el entorno virtual
+
+* En **Windows**:
+
+  ```bash
+  .\venv\Scripts\activate
+  ```
+* En **macOS/Linux**:
+
+  ```bash
+  source venv/bin/activate
+  ```
+
+> ✅ *Verás el prompt cambiado* — p. ej. `(venv) C:\…` — indica que estás dentro del entorno.
+
+---
+
+### 📦 3. Instala PyInstaller
+
+```bash
+pip install pyinstaller
+```
+
+> PyInstaller empaqueta tu código, el intérprete de Python y todas las librerías en un único ejecutable.
+
+---
+
+### ⚙️ 4. Genera tu `.exe` con un solo comando
+
+```bash
+pyinstaller --onefile Interfaz.py
+```
+
+* `--onefile`  ⇒ crea un único archivo `.exe`
+* `--windowed`  ⇒ oculta la consola (útil si es una GUI)
+* `--add-binary "origen;destino"`  ⇒ incluye archivos binarios externos
+
+> 🚀 **Ejemplo práctico usado en este proyecto:**
+>
+> ```bash
+> pyinstaller --onefile --windowed --add-binary ".\\Virtual\\Lib\\site-packages\\pylsl\\lib\\lsl.dll;pylsl/lib" Interfaz.py
+> ```
+>
+> Este comando empaqueta también la librería `lsl.dll` de `pylsl` dentro del ejecutable.
+
+---
+
+### 📂 5. Ubica tu ejecutable
+
+* Al finalizar verás dos carpetas:
+
+  * `build/`  ⇒ archivos temporales
+  * `dist/`   ⇒ aquí encontrarás `Interfaz.exe`
+* **Copia** `Interfaz.exe` donde quieras distribuirlo — p. ej. tu Escritorio.
+
+---
+
+### 🔍 6. Prueba tu aplicación
+
+1. Abre `Interfaz.exe` con **doble clic**.
+2. Ejecuta cada funcionalidad (Eliminar duplicados, Organizar archivos, Extraer audio, etc.) para verificar que todo funciona.
+3. Si hay errores, revisa:
+
+   * Que `requirements.txt` incluya todas las dependencias.
+   * Que las rutas a recursos (assets, DLLs) estén correctamente referenciadas.
+
+---
+
+### 🛠️ 7. Consejos y buenas prácticas
+
+* **Incluir archivos de datos:** Usa `--add-data "assets;assets"` si tu app necesita carpetas de recursos.
+* **Versionado:** Archiva tu `.exe` con convenciones semánticas (v1.0.0).
+* **Pruebas en máquina limpia:** Valida en un PC sin Python instalado.
+* **Documenta:** Añade en tu `README.md` cómo ejecutar y qué hace cada opción.
+
+---
+
+🎉 ¡Todo listo! Ahora puedes compartir tu aplicación Windows sin que nadie tenga que instalar Python ni librerías adicionales. Si necesitas profundizar en hooks, optimizaciones o distribuciones multiplataforma, házmelo saber.
+
 
 ---
 
@@ -39,7 +143,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🛠️ **Conversión del Script Python a .EXE**
+## 🛠️ **Conversión del Script Python a .EXE** OPCION 2
 
 Para convertir tu script en un ejecutable, necesitas una herramienta especial.
 
