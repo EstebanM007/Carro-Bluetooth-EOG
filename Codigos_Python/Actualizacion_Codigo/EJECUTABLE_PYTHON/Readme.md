@@ -83,7 +83,7 @@ pyinstaller --onefile Interfaz.py
 > 🚀 **Ejemplo práctico usado en este proyecto:**
 >
 > ```bash
-> pyinstaller --onefile --windowed --add-binary ".\\Virtual\\Lib\\site-packages\\pylsl\\lib\\lsl.dll;pylsl/lib" Interfaz.py
+> pyinstaller --onefile --windowed --add-binary ".\.venv\Lib\site-packages\pylsl\lib\lsl.dll;pylsl/lib" Interfaz.py
 > ```
 >
 > Este comando empaqueta también la librería `lsl.dll` de `pylsl` dentro del ejecutable.

@@ -3,7 +3,7 @@ import serial
 import time
 
 # Configuración del puerto serial
-#serialPort = serial.Serial('COM3', 9600, timeout=1)
+serialPort = serial.Serial('COM7', 9600, timeout=1)
 print("Puerto serial configurado correctamente.")
 
 # Función para buscar streams de manera continua
@@ -39,11 +39,11 @@ while True:
         sample, _ = inlet_EOG.pull_sample(timeout=0.5)
         if sample:
             # Aplicar condiciones a la señal EOG
-            if 310 <= sample[0] <= 350:  # Usar directamente sample[0] para las condiciones
-                #serialPort.write(b'D')  # Enviar comando 'D' por el puerto serial
+            if 190 <= sample[0] <= 200:  # Usar directamente sample[0] para las condiciones
+                serialPort.write(b'D')  # Enviar comando 'D' por el puerto serial
                 print("D enviado")
-            elif -360 <= sample[0] <= -310:  # Usar directamente sample[0] para las condiciones
-                #serialPort.write(b'W')  # Enviar comando 'W' por el puerto serial
+            elif -200 <= sample[0] <= -190:  # Usar directamente sample[0] para las condiciones
+                serialPort.write(b'W')  # Enviar comando 'W' por el puerto serial
                 print("W enviado")
         else:
             print("Sin muestra")
