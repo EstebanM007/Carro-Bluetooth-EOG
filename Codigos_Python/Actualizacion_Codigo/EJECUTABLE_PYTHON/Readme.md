@@ -17,7 +17,7 @@
 * Identificar los canales utilizados si existen múltiples.
 * 📡 Después del mapeo de umbrales, el script **envía datos al puerto COM** para comunicarse con un **microcontrolador**.
 
-![alt text](<Interfaz de Configuracion LSL y COM-1.png>)
+![Interfaz de Configuracion LSL y COM](Interfaz%20de%20Configuracion%20LSL%20y%20COM.png)
 
 ## 🚀 Guía Profesional para Convertir tu Proyecto Python en un `.exe` OPCION 1
 
@@ -158,7 +158,7 @@ pip install auto-py-to-exe
 ```bash
 auto-py-to-exe
 ```
-![alt text](auto-py-to-exe-1.png)
+![auto-py-to-exe](auto-py-to-exe.png)
 
 🧭 **Pasos en la interfaz gráfica:**
 
