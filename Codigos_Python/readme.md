@@ -131,6 +131,27 @@ pip install --upgrade numpy
 
 **Precaución:** Realiza actualizaciones en un entorno virtual temporal y revisa diferencias semánticas entre versiones.
 
+### 8. 🔄 `git reset --soft HEAD~1`
+
+**Función:** Deshace tu último commit, dejando los cambios en el área de staging (sin alterar el working tree).
+
+**Ventajas:**
+
+* Recupera fácilmente el estado previo a un commit erróneo sin perder tu trabajo.
+* Permite editar el mensaje del commit o agregar/quitar archivos antes de volver a commitear.
+* Mantiene intactos tus cambios en el índice, listos para un nuevo commit.
+
+**Uso:**
+
+```bash
+git reset --soft HEAD~1
+```
+
+* `HEAD~1` apunta al commit inmediatamente anterior al actual.
+
+**Recomendación:**
+Utilízalo cuando te des cuenta de un error en tu último commit (mensaje, archivos faltantes, etc.) y quieras corregirlo sin crear múltiples commits de “reversión”.
+
 ---
 
 ## 🚀 Buenas Prácticas
