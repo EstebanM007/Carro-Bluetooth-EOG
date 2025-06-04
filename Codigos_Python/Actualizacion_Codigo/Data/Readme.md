@@ -44,7 +44,7 @@ Estos pasos cargan la señal y el vector de tiempo correspondientes para su aná
 
   ```python
   plt.axhline(threshold_high, color='C1', linestyle='--', label=f'Umbral alto = μ + {k}·σ')
-  plt.axhline(threshold_low,  color='C1', linestyle='--', label=f'Umbral bajo = μ \u2212 {k}·σ')
+  plt.axhline(threshold_low,  color='C1', linestyle='--', label=f'Umbral bajo = μ - {k}·σ')
   ```
 
   Estas líneas (`umbral alto` y `umbral bajo`) muestran los límites estadísticos calculados. Se les añade etiqueta y color distintivo. Además, se anotan sus valores numéricos junto a las líneas usando `plt.text`, para mayor claridad.
