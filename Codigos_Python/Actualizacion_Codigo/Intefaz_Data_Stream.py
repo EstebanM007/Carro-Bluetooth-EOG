@@ -6,7 +6,7 @@ import serial
 import serial.tools.list_ports
 from pylsl import StreamInlet, resolve_streams
 import json
-
+# Este programa es una interfaz gráfica para configurar y controlar la lectura de streams de LSL (Lab Streaming Layer) y el envío de comandos a través de un puerto serial.
 # Clase que simula el puerto serial.
 class FakeSerial:
     def write(self, data):

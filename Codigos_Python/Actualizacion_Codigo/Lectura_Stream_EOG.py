@@ -1,7 +1,7 @@
 from pylsl import StreamInlet, resolve_streams  # Librería para leer streams de LSL
 import serial
 import time
-
+# Este programa lee 1 stream de tipo 'EOG' (Electrooculografía) a través de LSL (Lab Streaming Layer)
 # Configuración del puerto serial
 serialPort = serial.Serial('COM7', 9600, timeout=1)
 print("Puerto serial configurado correctamente.")

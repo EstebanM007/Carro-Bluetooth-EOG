@@ -14,13 +14,13 @@ def buscar_stream(tipo_stream):
         print(f"No se encontró stream de tipo '{tipo_stream}'. Reintentando en 2 segundos...")
         time.sleep(2)
 
-# Buscar los streams de tipo 'P1' y 'P2'
-stream_P1 = buscar_stream('P1')
-stream_P2 = buscar_stream('P2')
+# Buscar los streams de tipo 'Data1' y 'Data2'
+stream_Data1 = buscar_stream('Data1')
+stream_Data2 = buscar_stream('Data2')
 
 # Crear inlets para leer datos de los streams
-inlet_P1 = StreamInlet(stream_P1)
-inlet_P2 = StreamInlet(stream_P2)
+inlet_Data1 = StreamInlet(stream_Data1)
+inlet_Data2 = StreamInlet(stream_Data2)
 
 # Lista para almacenar los datos
 data_list = []
@@ -33,33 +33,35 @@ try:
     while True:
         try:
             # Leer una muestra de cada stream
-            sample_P1, _ = inlet_P1.pull_sample(timeout=0.5)
-            sample_P2, _ = inlet_P2.pull_sample(timeout=0.5)
+            sample_Data1, _ = inlet_Data1.pull_sample(timeout=0.5)
+            sample_Data2, _ = inlet_Data2.pull_sample(timeout=0.5)
 
             # Verificar que ambas muestras sean válidas
-            if sample_P1 and sample_P2:
+            if sample_Data1 and sample_Data2:
                 elapsed_time = time.time() - start_time  # Tiempo transcurrido en segundos
                 # Agregar los datos a la lista
-                data_list.append([elapsed_time, sample_P1[0], sample_P2[0]])
+                data_list.append([elapsed_time, sample_Data1[0], sample_Data2[0]])
                 # Este print verifica los datos que se están guardando, pero puede ser comentado para evitar saturar la consola.
-                # print(f"Guardado: Tiempo={elapsed_time:.3f}s, P1={sample_P1[0]}, P2={sample_P2[0]}")
+                # print(f"Guardado: Tiempo={elapsed_time:.3f}s, Data1={sample_Data1[0]}, Data2={sample_Data2[0]}")
 
         except Exception as e:
             print(f"Error al leer los streams: {e}. Intentando reconectar...")
             # Intentar reconectar los streams
-            stream_P1 = buscar_stream('P1')
-            stream_P2 = buscar_stream('P2')
-            inlet_P1 = StreamInlet(stream_P1)
-            inlet_P2 = StreamInlet(stream_P2)
+            stream_Data1 = buscar_stream('Data1')
+            stream_Data2 = buscar_stream('Data2')
+            inlet_Data1 = StreamInlet(stream_Data1)
+            inlet_Data2 = StreamInlet(stream_Data2)
 
 except KeyboardInterrupt:
-    print("Detenido por el usuario. Guardando datos en 'datos_streams.xlsx'...")
+    print("Detenido por el usuario. Guardando datos en 'datos_streams.csv'...")
 
 # Crear un DataFrame con los datos
-df = pd.DataFrame(data_list, columns=["Tiempo (s)", "P1", "P2"])
+df = pd.DataFrame(data_list, columns=["Tiempo (s)", "Data1", "Data2"])
 
-# Obtener la ruta del script actual y guardar el archivo Excel en la misma carpeta
+# Obtener la ruta del script actual y guardar el archivo CSV en la misma carpeta
 ruta_script = os.path.dirname(os.path.abspath(__file__))  # Ruta del script actual
-archivo_excel = os.path.join(ruta_script, "datos_streams.xlsx")  # Crear la ruta completa del archivo
-df.to_excel(archivo_excel, index=False)
-print(f"Archivo '{archivo_excel}' guardado correctamente.")
+archivo_csv = os.path.join(ruta_script, "datos_streams.csv")  # Crear la ruta completa del archivo
+
+# Guardar como CSV con separador ;
+df.to_csv(archivo_csv, index=False, sep=';')
+print(f"Archivo '{archivo_csv}' guardado correctamente.")
