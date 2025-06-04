@@ -1,8 +1,7 @@
 
 # 📊 Detección de movimientos oculares en señal EOG
 
-Este código en Python carga datos de una señal EOG (electrooculografía) horizontal desde un archivo CSV, calcula **umbrales** estadísticos y detecta eventos significativos (picos positivos y negativos). Luego grafica la señal con los umbrales y marca las activaciones detectadas. A continuación se explica cada parte del código y su aplicación práctica en un entorno de análisis de datos (por ejemplo, un README de GitHub).
-
+Este código en Python carga datos de una señal EOG (electrooculografía) horizontal desde un archivo CSV, calcula **umbrales** estadísticos y detecta eventos significativos (picos positivos y negativos). Luego grafica la señal con los umbrales y marca las activaciones detectadas. A continuación se explica cada parte del código y su aplicación práctica en un entorno de análisis de datos.
 ## 📥 Carga de datos
 
 * **Librerías:** Se importan `pandas` para manejo de datos, `matplotlib.pyplot` para graficar y `os` para gestionar rutas de archivos.
