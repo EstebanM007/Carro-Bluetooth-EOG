@@ -1,13 +1,3 @@
-Perfecto, crearé un archivo `README.md` en español con formato para GitHub. Incluirá:
-
-* ✨ Explicación clara de la funcionalidad del script.
-* 📊 Descripción del procesamiento y cálculo de umbrales.
-* 📈 Visualización con matplotlib.
-* ⚙️ Parámetros configurables.
-* ✅ Casos de uso y cómo interpretar los resultados.
-
-Te aviso en cuanto el Markdown esté listo para revisión.
-
 
 # 📊 Detección de movimientos oculares en señal EOG
 
